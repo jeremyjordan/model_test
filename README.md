@@ -12,6 +12,8 @@ Model tests are executed in two phases:
     - Return test cases that follow an expected schema.
         - Supported keys: `'data'`, `'label'`, and `'metadata'`
         - For large files (eg. images), save the file and pass a reference to the file in the `data` field. See `examples/image_classifier` for an example.
+    - It's likely that you'll iterate on model tests less frequently than you train your models. Here, we generate the test cases and save them as a collection of JSON objects which provide a static test set for evaluating models. You can copy this output to a location in S3 and then download the same test cases when testing newly trained models.
+        - Why JSON? Simply, it's easy to open and inspect the files directly.
 
 ```
 @model_test.mark.invariance
@@ -30,7 +32,7 @@ def test_invariance_english_names():
 2. Define code to perform model inference and **evaluate** test cases.
     - Define a function for each test *type* (invariance, directional expectation, etc.) that returns a boolean value denoting whether the model passed that test case.
     - By convention, define these functions in a module named `model_conf.py` in the root of your tests directory.
-
+    - Tests are executed over the static set of JSON files produced from step 1.
 ```
 @model_test.register('invariance')
 def invariance_test(examples):
