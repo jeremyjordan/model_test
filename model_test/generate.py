@@ -2,6 +2,7 @@
 Generate test cases and store as JSON for later execution.
 """
 import json
+import shutil
 from pathlib import Path
 from typing import Callable, List, Tuple, Union
 
@@ -69,6 +70,6 @@ def generate_tests(dir_path: str, prefix: str = "test", suffix: str = None):
 
 
 def clear_cache(dir_path: str):
-    import shutil
-
-    shutil.rmtree(dir_path)
+    dir_path = Path(dir_path)
+    if dir_path.exists():
+        shutil.rmtree(dir_path)
