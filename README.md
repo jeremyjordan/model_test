@@ -44,7 +44,14 @@ There is a simple CLI which makes it easy to execute tests.
 
 ## Examples
 
-Check out the `examples/` directory to see how we could write tests for a sentiment classification model and an image classification model. 
+Check out the `examples/` directory to see how we could write tests for a sentiment classification model and an image classification model.
+
+Setup
+```
+git clone https://github.com/jeremyjordan/model_test.git
+cd model_test
+pip install -e .
+```
 
 Sentiment classification:
 ```
