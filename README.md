@@ -51,6 +51,8 @@ Setup
 git clone https://github.com/jeremyjordan/model_test.git
 cd model_test
 pip install -e .
+pip install -r examples/sentiment_analysis/requirements.txt
+pip install -r examples/image_classifier/requirements.txt
 ```
 
 Sentiment classification:
