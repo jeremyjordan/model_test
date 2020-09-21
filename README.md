@@ -72,8 +72,9 @@ model_test run "examples/image_classifier/"
 - [ ] Overall design of library, more robust checks
 - [ ] Support user defined fixtures
 - [ ] Parametrize decorator (with repeat for random sampling)
-- [ ] Add domain-specific generator functions to library (eg. `build_inv_pair_from_template`)
+- [ ] Allow exporting test results
 - [ ] Highlight data examples that fail tests
+- [ ] Add domain-specific generator functions to library (eg. `build_inv_pair_from_template`)
 - [ ] Save MD5 hash for files referenced in tests
 - [ ] Make random seed configurable
 - [ ] Brainstorm how to report model coverage
