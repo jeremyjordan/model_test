@@ -1,0 +1,4 @@
+albumentations==0.4.6
+Pillow==7.2.0
+torch==1.6.0
+torchvision==0.7.0
