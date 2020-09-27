@@ -12,6 +12,8 @@ Model tests are executed in two phases:
     - Return test cases that follow an expected schema.
         - Supported keys: `'data'`, `'label'`, and `'metadata'`
         - For large files (eg. images), save the file and pass a reference to the file in the `data` field. See `examples/image_classifier` for an example.
+    - It's likely that you'll iterate on model tests less frequently than you train your models. Here, we generate the test cases and save them as a collection of JSON objects which provide a static test set for evaluating models. You can copy this output to a location in S3 and then download the same test cases when testing newly trained models.
+        - Why JSON? Simply, it's easy to open and inspect the files directly.
 
 ```
 @model_test.mark.invariance
@@ -30,7 +32,7 @@ def test_invariance_english_names():
 2. Define code to perform model inference and **evaluate** test cases.
     - Define a function for each test *type* (invariance, directional expectation, etc.) that returns a boolean value denoting whether the model passed that test case.
     - By convention, define these functions in a module named `model_conf.py` in the root of your tests directory.
-
+    - Tests are executed over the static set of JSON files produced from step 1.
 ```
 @model_test.register('invariance')
 def invariance_test(examples):
@@ -44,7 +46,16 @@ There is a simple CLI which makes it easy to execute tests.
 
 ## Examples
 
-Check out the `examples/` directory to see how we could write tests for a sentiment classification model and an image classification model. 
+Check out the `examples/` directory to see how we could write tests for a sentiment classification model and an image classification model.
+
+Setup
+```
+git clone https://github.com/jeremyjordan/model_test.git
+cd model_test
+pip install -e .
+pip install -r examples/sentiment_analysis/requirements.txt
+pip install -r examples/image_classifier/requirements.txt
+```
 
 Sentiment classification:
 ```
@@ -63,8 +74,9 @@ model_test run "examples/image_classifier/"
 - [ ] Overall design of library, more robust checks
 - [ ] Support user defined fixtures
 - [ ] Parametrize decorator (with repeat for random sampling)
-- [ ] Add domain-specific generator functions to library (eg. `build_inv_pair_from_template`)
+- [ ] Allow exporting test results
 - [ ] Highlight data examples that fail tests
+- [ ] Add domain-specific generator functions to library (eg. `build_inv_pair_from_template`)
 - [ ] Save MD5 hash for files referenced in tests
 - [ ] Make random seed configurable
 - [ ] Brainstorm how to report model coverage
