@@ -46,6 +46,9 @@ There is a simple CLI which makes it easy to execute tests.
 
 ## Examples
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](http://colab.research.google.com/github/jeremyjordan/model_test/blob/master/examples/examples.ipynb)
+
+
 Check out the `examples/` directory to see how we could write tests for a sentiment classification model and an image classification model.
 
 Setup
