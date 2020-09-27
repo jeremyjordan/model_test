@@ -2,10 +2,10 @@
 Run the test cases.
 """
 import json
-from importlib import import_module
 from pathlib import Path
 from typing import List
 
+from model_test.discovery import robust_module_import
 from model_test.generate import SAVE_DIR
 from model_test.reporting import progress, summarize_tests
 
@@ -27,8 +27,7 @@ def find_test_cases(dir_path: str) -> List[Path]:
 
 def load_model_funcs(dir_path: str):
     module_path = Path(dir_path) / "model_conf.py"
-    module_path = str(module_path).replace("/", ".").strip(".py")
-    import_module(module_path)
+    robust_module_import(module_path)
 
 
 def collect_tests(dir_path: str):
