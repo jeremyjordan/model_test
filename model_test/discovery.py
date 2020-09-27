@@ -38,6 +38,7 @@ def robust_module_import(module_path: Path):
             "Can't find module {} at location {}".format(module_name, str(module_path))
         )
     module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
     return module
 
 
@@ -49,7 +50,6 @@ def find_test_functions(
     if not suffix:
         suffix = ""
 
-    module_path = str(module_path).replace("/", ".").strip(".py")
     module = robust_module_import(module_path)
     functions_list = [
         (name, func)
